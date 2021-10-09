@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <SignAssembly>True</SignAssembly>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Authors>Ricardo Boss</Authors>
+        <Description>
+Base classes for windows, pages and controls using MVVM and dependency injection.</Description>
+        <Copyright>2021 Ricardo Boss</Copyright>
+        <PackageProjectUrl>https://github.com/ricardoboss/HostedWPF</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/ricardoboss/HostedWPF</RepositoryUrl>
+        <PackageLicenseFile>C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\LICENSE</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <AssemblyOriginatorKeyFile>C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\HostedWPF.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\README.md">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>
