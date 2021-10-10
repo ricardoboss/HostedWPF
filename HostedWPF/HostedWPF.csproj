@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0-windows</TargetFramework>
@@ -13,9 +13,9 @@ Base classes for windows, pages and controls using MVVM and dependency injection
         <PackageProjectUrl>https://github.com/ricardoboss/HostedWPF</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/ricardoboss/HostedWPF</RepositoryUrl>
-        <PackageLicenseFile>C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\LICENSE</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <AssemblyOriginatorKeyFile>C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\HostedWPF.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>..\HostedWPF.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -23,10 +23,9 @@ Base classes for windows, pages and controls using MVVM and dependency injection
     </PropertyGroup>
 
     <ItemGroup>
-      <None Include="C:\Users\ricar\Source\Repos\ricardoboss\HostedWPF\README.md">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None>
+      <None Include="..\README.md" Pack="true" PackagePath="" />
+      <None Include="..\LICENSE" Pack="true" PackagePath="" />
+      <None Include="..\HostedWPF.snk" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using HostedWpf.ViewModels;
+using HostedWpf.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Controls;
@@ -32,7 +32,7 @@ namespace HostedWpf.Windows
             {
                 Console.Error.WriteLine("Error while getting view model: " + e.Message);
 
-#if DEBUG
+#if RELEASE
                 throw;
 #endif
             }
