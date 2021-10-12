@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -36,7 +36,7 @@ namespace HostedWpf
 
         protected virtual void ConfigureAppConfig(IConfigurationBuilder builder) => builder
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
 
         private void ConfigureServicesInternal(HostBuilderContext context, IServiceCollection collection)
@@ -67,8 +67,17 @@ namespace HostedWpf
             MainWindow.Show();
         }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            Host.StartAsync().GetAwaiter().GetResult();
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
+            Host.StopAsync().GetAwaiter().GetResult();
+
             appStoppingTokenSource.Cancel();
 
             base.OnExit(e);
