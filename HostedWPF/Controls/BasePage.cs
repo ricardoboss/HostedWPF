@@ -6,7 +6,7 @@ using System.Windows.Controls;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedType.Global
 
-namespace HostedWpf.Windows
+namespace HostedWpf.Controls
 {
     public abstract class BasePage<TViewModel> : Page where TViewModel : BaseViewModel
     {
