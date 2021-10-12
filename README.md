@@ -31,7 +31,15 @@ namespace Test
         {
             base.ConfigureServices(context, collection);
         }
+
+        /// <inheritdoc />
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // explicitly set which window is the main window in startup
+            SetMain<MainWindow>();
+        }
     }
 }
-
 ```
