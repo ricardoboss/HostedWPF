@@ -1,11 +1,7 @@
 using System;
-using System.IO;
 using System.Threading;
 using System.Windows;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -13,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace HostedWpf
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class BaseApp : Application
+    public abstract class BaseApp : Application
     {
         public new static BaseApp Current => Application.Current as BaseApp ?? throw new ApplicationException("Current Application is not a BaseApp instance!");
 
@@ -27,45 +23,11 @@ namespace HostedWpf
 
         public BaseApp()
         {
-            Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(Environment.GetCommandLineArgs())
-                .ConfigureAppConfiguration(ConfigureAppConfig)
-                .ConfigureServices(ConfigureServicesInternal)
-                .ConfigureLogging(ConfigureLogging)
+            Host = ConfigureHost(Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(Environment.GetCommandLineArgs()))
                 .Build();
         }
 
-        protected virtual void ConfigureAppConfig(IConfigurationBuilder builder) => builder
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-
-        private void ConfigureServicesInternal(HostBuilderContext context, IServiceCollection collection)
-        {
-            ConfigureServices(context, collection);
-        }
-
-        protected virtual void ConfigureServices(HostBuilderContext context, IServiceCollection collection)
-        {
-        }
-
-        protected virtual void ConfigureLogging(HostBuilderContext context, ILoggingBuilder builder)
-        {
-        }
-
-        public void SetMain<TWindow>() where TWindow : Window
-        {
-            var next = Services.GetRequiredService<TWindow>();
-
-            SetMain(next);
-        }
-
-        public void SetMain<TWindow>(TWindow next) where TWindow : Window
-        {
-            MainWindow?.Close();
-
-            MainWindow = next;
-            MainWindow.Show();
-        }
+        protected abstract IHostBuilder ConfigureHost(IHostBuilder builder);
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -76,11 +38,18 @@ namespace HostedWpf
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Host.StopAsync().GetAwaiter().GetResult();
+            try
+            {
+                Host.StopAsync().GetAwaiter().GetResult();
 
-            appStoppingTokenSource.Cancel();
+                appStoppingTokenSource.Cancel();
 
-            base.OnExit(e);
+                base.OnExit(e);
+            }
+            finally
+            {
+                Host.Dispose();
+            }
         }
     }
 }
