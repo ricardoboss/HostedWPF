@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 namespace HostedWpf
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public abstract class BaseApp : Application
+    public class BaseApp : Application
     {
         public new static BaseApp Current => Application.Current as BaseApp ?? throw new ApplicationException("Current Application is not a BaseApp instance!");
 
@@ -27,7 +27,10 @@ namespace HostedWpf
                 .Build();
         }
 
-        protected abstract IHostBuilder ConfigureHost(IHostBuilder builder);
+        protected virtual IHostBuilder ConfigureHost(IHostBuilder builder)
+        {
+            return builder;
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
