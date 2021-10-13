@@ -101,8 +101,6 @@ And last, but not least, you will need to create a view model for your `MainWind
 ```csharp
 using HostedWpf.ViewModels;
 
-using System.Windows.Controls;
-
 namespace MyApp.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
