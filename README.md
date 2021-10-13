@@ -20,16 +20,18 @@ using HostedWpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Test
+namespace MyApp
 {
     public partial class App
     {
         public new static App Current => BaseApp.Current as App ?? throw new ApplicationException("Current Application is not an App instance!");
 
         /// <inheritdoc />
-        protected override void ConfigureServices(HostBuilderContext context, IServiceCollection collection)
+        protected override IHostBuilder ConfigureHost(IHostBuilder builder)
         {
-            base.ConfigureServices(context, collection);
+            // TODO: configure logging, configuration and services
+
+            return builder;
         }
 
         /// <inheritdoc />
@@ -38,7 +40,8 @@ namespace Test
             base.OnStartup(e);
 
             // explicitly set which window is the main window in startup
-            SetMain<MainWindow>();
+            MainWindow = Services.GetRequiredService<MainWindow>();
+            MainWindow.Show();
         }
     }
 }
