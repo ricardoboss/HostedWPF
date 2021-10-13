@@ -119,6 +119,6 @@ Of course, you can also craft windows yourself and you don't have to use `Hosted
 
 > HostedWPF provides all benefits from dependency injection you already know and love from (ASP).NET Core services.
 
-The view models also provide code completion for the XAML designer, so you can easily desing and develop while creating your views.
+The view models also provide code completion for the XAML designer, so you can easily design and develop while creating your views.
 `BaseViewModel` implements `INotifyPropertyChanged`, so you don't have to implement it yourself every time. It also provides
 some convenient methods like `SetProperty<T>` which you can use in your property setters to update values displayed in your view.
